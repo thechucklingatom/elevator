@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace elevator.Controllers;
@@ -16,6 +17,7 @@ public class ElevatorController: ControllerBase
     [HttpGet("AvailableFloors")]
     public new List<int> GetAvailableFloors([FromServices] Elevator elevator)
     {
+        //special floors
         if (!(User.Identity?.IsAuthenticated ?? false))
         {
             return elevator.ButtonPanel.PublicFloors;
@@ -23,6 +25,5 @@ public class ElevatorController: ControllerBase
 
         return elevator.ButtonPanel.PublicFloors.Concat(elevator.ButtonPanel.PrivateFloors).ToList();
     }
-
 
 }
