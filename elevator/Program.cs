@@ -1,6 +1,6 @@
-using elevator;
+using elevator.Models;
+using elevator.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -56,6 +56,8 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = "https://localhost:8080"
         };
 });
+
+builder.Services.AddHostedService<ElevatorWorkerService>();
 
 var app = builder.Build();
 
